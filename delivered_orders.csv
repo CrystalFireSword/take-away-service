@@ -1,0 +1,3 @@
+orderid,order_items,total_items,total_price,payment_status,order_status,order_time,delivery_time
+D08062024O0001,"[['I004', 'Ginger Tea', '2', '15', 30], ['I005', 'Instant Coffee', '3', '15', 45]]",5,75,1,4,2024-06-08 23:11:11.631099,2024-06-08 23:19:51.346896
+D08062024O0002,"[['I003', 'Hot Plain Milk', '1', '10', 10], ['I007', 'Hot Badam Milk', '1', '20', 20]]",2,30,1,4,2024-06-08 23:12:23.038224,2024-06-08 23:19:46.973219

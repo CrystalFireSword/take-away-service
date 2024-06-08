@@ -1,0 +1,50 @@
+Item_no,Item_name,Item_price,Availability
+D001,Coffee,20,1
+D002,Tea,15,1
+D003,Milk,20,1
+D004,Horlicks,20,1
+D005,Boost,20,1
+D006,Iced Tea,25,1
+D007,Badam Milk,30,1
+D008,Masala Tea,30,1
+J001,Watermelon,30,1
+J002,Mint Lime,25,1
+J003,Lime,20,1
+J004,Pine lemon,30,1
+J005,Muskmelon,50,1
+J006,Mango,60,1
+J007,Orange,40,1
+J008,Sherbeth,30,1
+J009,Rose Milk,30,1
+J010,Grape lemon,30,1
+B001 ,Plain Dosa,35,1
+B002,Pongal,40,1
+B003,Masala Dosa,45,1
+B004,Idli,30,1
+B005,Vada,20,1
+B006,Podi Dosa,45,1
+B007,Podi Onion,50,1
+B008,Rava Dosa,60,1
+B009,Chicken Dosa,70,1
+B010,Egg Dosa,60,1
+B011,Poori Masala,50,1
+L001,Chapathi,15,1
+L002,Parotta,25,1
+L003,Chapathi(3 pieces) with veg kurma,50,1
+L004,Chapathi with paneer butter masala,60,1
+L005,Chapathi with chicken kurma,100,1
+L006,Chicken chettinad,120,1
+L007,Butter Chicken,120,1
+L008,Machurian Chicken,110,1
+L009,Gobi Machurian dry,120,1
+L010,Gobi Machurian gravy,120,1
+L011,Chicken noodles,120,1
+L012,Paneer noodles,100,1
+L013,Veg noodles,110,1
+L014,Gobi Noodles,120,1
+L015,Mushroom Noodles,130,1
+L016,Veg Fried Rice,100,1
+L017,Mushroom Fried Rice,140,1
+L018,Schezuan Fried Rice,135,1
+L019,Gobi Fried Rice,130,1
+L020,Chicken Fried rice,120,1
