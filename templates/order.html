@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDER PAGE</title>
+    <link rel = 'stylesheet' type="text/css" href= "../static/style.css"/>
+    <link rel = 'stylesheet' type="text/css" href= "../static/style1.css"/>
+    <link rel = 'stylesheet' type="text/css" href= "../static/table_design.css"/>
+</head>
+<body>
+  <form action = '#' method = 'post'> 
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Rishabh's Food Court Logo">
+        </div>
+        <div class="home-icon">
+            <a href = "http://127.0.0.1:5000/">
+            <img src="{{ url_for('static', filename='home-icon.png') }}" alt="Home" >
+            </a>
+        </div>
+    </header>
+
+    <video id="background-video" autoplay loop muted>
+        <source src="../static/food1.mp4" type="video/mp4">
+    </video>
+            
+            <h2>
+                ORDER
+            </h2>
+            
+        </div>
+        <div class="container">
+            
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Item ID</div>
+                <div class="col col-2">Item Name</div>
+                <div class="col col-3">Quantity</div>
+                <div class="col col-4">Price</div>
+              </li>
+
+            {% for item1 in item_list %}
+              <li class="table-row">
+                
+                <div class="col col-1" data-label="Item ID" > {{ item1[0] }} </div>
+                <div class="col col-2" data-label="Item Name">{{ item1[1] }}</div>
+                <div class="col col-3" data-label="Quantity">
+                <input name ={{item1[0]}} >
+                </div>
+                <div class="col col-4" data-label="Price">{{ item1[2] }}</div>
+
+              </li>
+              {% endfor %}
+              <li class="table-row">
+                <div> </div>
+              </li>
+            
+            </ul>
+          </div>
+
+
+</div>
+
+<footer>
+  <div class="container1">
+  <button class = 'button center' type = "submit" id = "go_to_cart" >GO TO CART</button>
+    <p class="left">&copy; 2024 Rishabh's Food Court.</p>
+  </div>
+</footer>
+
+</form>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Rishabh's Food Court{% endblock %}
+
+{% block content %}
+<div class="center-logo">
+    <img class = 'image' src = '../static/rfc.png'>
+    
+</div>
+<div class="button-container">
+    <form action=http://127.0.0.1:5000/order>
+    <button class="button" id = 'order'>ORDER</button>
+    </form>
+    <form action=http://127.0.0.1:5000/track>
+    <button class="button" id = 'track'>TRACK</button>
+    </form>
+    <form action=http://127.0.0.1:5000/login>
+    <button class="button" id = 'login'>LOG IN</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Orders</title>
+    <link rel = 'stylesheet' type="text/css" href= "../static/style.css"/>
+    <link rel = 'stylesheet' type="text/css" href= "../static/style1.css"/>
+    <link rel = 'stylesheet' type="text/css" href= "../static/table_design.css"/>
+</head>
+<body>
+  <form action = '#' method = 'post'> 
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Rishabh's Food Court Logo">
+        </div>
+        <div class="home-icon">
+            <a href = "http://127.0.0.1:5000/">
+            <img src="{{ url_for('static', filename='home-icon.png') }}" alt="Home" >
+            </a>
+        </div>
+    </header>
+
+    <video id="background-video" autoplay loop muted>
+        <source src="../static/food1.mp4" type="video/mp4">
+    </video>
+            
+            <h2>
+                CHECK ORDERS
+            </h2>
+            
+        </div>
+        <div class="container">
+          
+          <ul class="responsive-table">
+            <li class="table-header">
+              <div class="col col-2">ORDER ID</div>
+              <div class="col col-3">TOTAL QUANTITY</div>
+              <div class="col col-3">TOTAL PRICE</div>
+              <div class="col col-4">PAYMENT STATUS</div>
+              <div class="col col-2">PAYMENT CONFIRMATION</div>
+              <div class="col col-6">ORDER RECEIVED</div>
+              <div class="col col-7">ORDER TAKEN</div>
+              <div class="col col-8">ORDER READY</div>
+              <div class="col col-9">ORDER DELIVERED</div>
+              
+            </li>
+              
+          {% for item1 in order_list %}
+            <li class="table-row">
+              
+              <div class="col col-2" data-label="Order ID" > 
+              <a href = 'http://127.0.0.1:5000/order_status/{{item1[0]}}'> {{item1[0]}}</a>
+              </div>
+              <div class="col col-3" data-label="Total Quantity">{{ item1[2] }}</div>
+              <div class="col col-3" data-label="Total Price"> {{item1[3]}}</div>
+              <div class="col col-4" data-label="Payment Status">
+                
+                  {% if item1[4] == '1' or item1[5] > '0' %}
+                  <input type = 'checkbox' name = 'Pay:{{item1[0]}}' value = 1  checked>
+                  {%else%}
+                  <input type = 'checkbox' name = 'Pay:{{item1[0]}}' value = 1 >
+                  {% endif %}
+              
+              </div>
+              <div class="col col-2" data-label="Payment Confirmation">
+              {% if item1[5] > '0' %}
+                  <input type = 'checkbox' name = 'PaymentConfirmed:{{item1[0]}}' value = 1 checked>
+                  {%else%}
+                  <input type = 'checkbox' name = 'PaymentConfirmed:{{item1[0]}}' value = 1 >
+
+              {% endif %}
+              </div>
+
+              <div class="col col-6" data-label="Order Received">
+                {% if item1[5] >= '1' %}
+                    <input type = 'checkbox' name = 'OrderReceived:{{item1[0]}}' value = 1 checked>
+                    {%else%}
+                    <input type = 'checkbox' name = 'OrderReceived:{{item1[0]}}' value = 1  >
+                    
+                {% endif %}
+                </div>
+
+              <div class="col col-7" data-label="Order Taken">
+              {% if item1[5] >= '2' %}
+                  <input type = 'checkbox' name = 'OrderTaken:{{item1[0]}}' value = 1 checked>
+                  {%else%}
+                  <input type = 'checkbox' name = 'OrderTaken:{{item1[0]}}' value = 1  >
+                  
+              {% endif %}
+              </div>
+              
+              <div class="col col-8" data-label="Order Ready">
+              {% if item1[5] >= '3' %}
+                  <input type = 'checkbox' name = 'OrderReady:{{item1[0]}}' value = 1 checked>
+                  {%else%}
+                  <input type = 'checkbox' name = 'OrderReady:{{item1[0]}}' value = 1  >
+                  
+              {% endif %}
+              </div>
+
+              <div class="col col-9" data-label="Order Delivered">
+                {% if item1[5] >= '4' %}
+                    <input type = 'checkbox' name = 'OrderDelivered:{{item1[0]}}' value = 1 checked>
+                {%else%}
+                    <input type = 'checkbox' name = 'OrderDelivered:{{item1[0]}}' value = 1  >
+                    
+                {% endif %}
+                </div>
+
+            </li>
+          {% endfor %}
+          <li class="table-row">
+            <div> </div>
+          </li>
+          </ul>
+        </div>
+</div>
+
+<footer>
+  <div class="container1">
+  <button class = 'button center' type = "submit" id = "take_order" >SAVE CHANGES</button>
+    <p class="right">&copy; 2024 Rishabh's Food Court.</p>
+  </div>
+</footer>
+
+
+</form>
+</body>
+
+</html>

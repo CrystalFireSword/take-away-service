@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block title%} ADMIN PAGE {% endblock %}
+{% block content %} 
+
+<div class="center-logo">
+    <img class = 'image' src = '../static/rfc.png'>
+</div>
+{% endblock %}
+
+{%block remaining%}
+<h2> {{ contents }}</h2>
+<div class="button-container">
+    <form method="post">
+        <button class = 'button' id = 'view_orders' name="button_clicked" value="view_orders"  type = 'submit'> CHECK ORDERS BY ID</button>
+    </form>
+    <form method = 'post'>
+        <button class = 'button' id = 'view_by_items' name="button_clicked" value="view_by_items"  type = 'submit'> CHECK ORDERS BY ITEMS </button>
+    </form>
+    <form method = 'post'>
+        <button class = 'button' id = 'update_menu' name="button_clicked" value="update_menu"  type = 'submit'> UPDATE MENU </button>
+    </form>
+    <form method = 'post'>
+        <button class = 'button' id = 'delivered_orders' name="button_clicked" value="delivered_orders"  type = 'submit'> DELIVERED ORDERS </button>
+    </form>
+    <form method="post">
+        <button class = 'button' id = 'logout' name="button_clicked" value="logout"  type = 'submit'> LOGOUT </button>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title%} Payment Page{% endblock %}
+{% block content %} 
+<h1>
+    PAYMENT
+</h1>
+
+<h3>
+NOTE: If you continue after this, your order will be RECORDED, further navigation or returning to this page and resubmission will count as a NEW ORDER. <br>
+<br>
+BILL TOTAL: {{ total_price }}<br>
+
+<h3>{{ content_to_show }}</h3>
+</h3>
+{% endblock %}
+
+{% block remaining %}
+
+<form action="#" class="text_holder2" method = 'post'>
+
+
+<div class = login_pane>
+<div class="mb-3">
+    <label for="username" class="text_holder1">Name </label>
+    
+    <input name = 'Name' class="form-control" id="Name" >
+    <br>
+    <label for="exampleInputEmail1" class="text_holder1">Email</label>
+    
+    <input type="email" name = 'EmailId' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <br>
+    <div id="emailHelp" class="form-text">{{content}}</div>
+
+<br>
+<button class="button" type="submit" name="Proceed"> CONTINUE </button>
+</div>
+</div>
+</form>
+{% endblock %}

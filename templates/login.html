@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title%} LOGIN Page {% endblock %}
+{% block content %} 
+<h2>
+    LOGIN
+</h2>
+{% endblock %}
+{% block remaining %}
+<div class="icon_pane">
+  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="white" class="bi bi-person-circle" id = 'icon1' viewBox="0 0 16 16">
+    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+  </svg>
+</div>
+<div class = 'login_pane'>
+  
+<form action = '#' method = 'post'>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="text_holder1">Email address</label>
+      <br>
+      <input type="email" name = 'EmailId' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      <br>
+      <div id="emailHelp" class="form-text">{{content}}</div>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="text_holder1">Password</label>
+      <br>
+      <input type="password" name="pwd" class="form-control" id="exampleInputPassword1">
+    </div>
+    
+    <button class = 'button' type = "submit" id = "send1" >Submit</button>
+  </form> 
+</div>
+{% endblock %}

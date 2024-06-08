@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title%} Order Final Page{% endblock %}
+{% block content %} 
+<h2>
+    Thanks for ordering!
+
+</h2>
+
+{% endblock %}
+
+{% block remaining %}
+
+<form action="#" class="text_holder2" method = 'post'>
+<h3>
+Your order id is {{ unique_id }}<br>
+Use this ID to track your order!<br>
+BILL TOTAL: {{ total_price }}<br>
+
+
+Please show your payment proof at the desk to confirm payment!
+<br><br><br>
+  
+
+<button class="button" type="submit" name="Proceed"> GO BACK HOME </button>
+</form>
+{% endblock %}
