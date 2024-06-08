@@ -314,12 +314,5 @@ def delivered_orders():
         return redirect(url_for('login'))
 
 
-@app.route('/test_dynamic_page')
-def dynamic_page():
-    return render_template('dyn_con.html', to_display = 'This page is for experimenting and testing')
-
-
-
-
 if __name__ == '__main__':
     app.run()
