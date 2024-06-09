@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 import smtplib
 from email.message import EmailMessage
 from email import encoders
@@ -11,7 +9,9 @@ from email.mime.audio import MIMEAudio
 import mimetypes
 
 def send_mail(to_address, status, o_id, name = ''):
-    website = ''
+    ''' SENDS MAIL TO USER ON ORDER STATUS UPDATION '''
+    
+    website = 'http://rebrand.ly/rishabhsfoodcourt'
     
     smtp = smtplib.SMTP('smtp.gmail.com', 587) 
     smtp.ehlo() 
@@ -30,7 +30,7 @@ def send_mail(to_address, status, o_id, name = ''):
                 
                 <p>Hi {name}! We are from Rishabh's Food Court!<br>
                 Your ORDER {status}! <br>
-                You can track your order on our website {website}using your order id. <br> 
+                You can track your order on our website {website} using your order id. <br> 
                 Order ID: {o_id}<br>
                 Thank you! Enjoy your meal! </p>
                 <p><img src="cid:image1"/></p>
