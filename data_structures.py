@@ -1,4 +1,4 @@
-# queue for sdp
+# contains code for data structures used in the project
 
 
 class WrapperStack:
@@ -65,6 +65,9 @@ class WrapperQueue:
             return False
         
 class PQueue:
+
+    ''' Priority Queue '''
+    
     def __init__(self):
         self._hpq = WrapperQueue()
         self._lpq = WrapperQueue()
@@ -105,37 +108,3 @@ class PQueue:
             return self._lpq.rear()
         else:
             return 'Queue priority invalid'
-
-
-
-# driver code
-
-
-# order_queue = PQueue()
-
-# items = []  #list of items
-# action = [1,2] # 1 for placing order, 2 for dequeueing
-
-# if ar == 1:
-#     if len(items)>3:
-#         priority = 0
-#     else:
-#         priority = 1
-#     if priority in [1,0]:
-#         item = input('Item:')
-#         order_queue.enqueue(priority, item)
-        
-#     else:
-#         print('Priority invalid.')
-        
-# elif ar == 2:
-#     if order_queue.isEmpty():
-#         print('The order queue is Empty. No order to take.')
-#     else:
-#         order = order_queue.dequeue()
-#         print('Order to be taken:', order)
-# else:
-#     print('Number invalid.')
-# ans = input('Do you want to continue? (y/n):')
-# ans = ans.lower()
-
