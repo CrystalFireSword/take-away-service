@@ -4,6 +4,9 @@ from data_structures import PQueue, WrapperStack
 from datetime import datetime
 import datetime as date_time
 def send_to_cart(form_response):
+
+    ''' SENDS ITEMS FROM THE INITIAL ORDER TO THE CART'''
+    
     cart_items = []
     for item_id in form_response:
         
@@ -16,6 +19,8 @@ def send_to_cart(form_response):
     return cart_items
 
 def calculate_bill_total(list_to_bill):
+
+    ''' CALCULATES THE TOTAL PRICE OF ORDERED ITEMS '''
     bill_total = 0
     if list_to_bill != [[]]:
         for x in range(len(list_to_bill)):
@@ -26,16 +31,21 @@ def calculate_bill_total(list_to_bill):
     return bill_total, list_to_bill
 
 def make_len(string, length):
+
+    ''' CONVERTS GIVEN STRING TO A STRING OF GIVEN LENGTH BY ADDING ZEROES BEFORE THE STRING '''
     return_string = string
     while len(return_string)<length:
         return_string = '0'+return_string
     return return_string
 
 def find_order_status(order_id, delivered = True):
+
+    ''' FINDS ORDER STATUS BASED ON ORDER ID '''
     current_order_status = -1
     price = []
     items_list = []
     with open('current_orders.csv', 'r', newline = '') as f:
+        ''' CHECKS IF ORDER IS LIVE '''
         r = csv.reader(f)
         for x in r:
             try:
@@ -53,6 +63,7 @@ def find_order_status(order_id, delivered = True):
         return items_list, price, current_order_status
     
     if items_list == []:
+        ''' IF ORDER IS NOT LIVE, CHECKS IN DELIVERED ORDERS '''
         with open('delivered_orders.csv', 'r', newline = '') as f:
             r = csv.reader(f)
             for x in r:
@@ -72,6 +83,7 @@ def find_order_status(order_id, delivered = True):
     return items_list, price, current_order_status
 
 def text_order_status(order_status = -1):
+    ''' CONVERTS ORDER STATUS, WHICH IS AN INTEGER, TO TEXT '''
     status = 'STATUS: '
     if order_status == -1:
         return status
@@ -91,6 +103,7 @@ def text_order_status(order_status = -1):
 
 
 def current_order_list():
+    ''' RETURNS LIST OF LIVE ORDERS '''
     orders = []
     with open('current_orders.csv', 'r') as f:
         r = csv.reader(f)
@@ -107,13 +120,14 @@ def current_order_list():
         return orders
 
 def payment_text(status = '0'):
+    ''' RETURNS TEXT FOR PAYMENT CONFIRMATION, USED IN HTML FILE TO DYNAMICALLY CHECK OR UNCHECK AVAILABILITY BOX '''
     if status == '1':
         return 'Payment not confirmed'
     else:
         return 'Payment confirmed!'
 
 def write_current_order(order_list_to_write, write_to_file = 'current_orders.csv', mode = 'w'):
-
+    ''' WRITES LIST OF CURRENT ORDERS TO THE FILE '''
     if write_to_file == 'current_orders.csv':
         if order_list_to_write == []:
             order_list_to_write = [[]]
@@ -124,7 +138,7 @@ def write_current_order(order_list_to_write, write_to_file = 'current_orders.csv
             writer.writerow(row_to_be_entered)
             writer.writerows(rows_to_be_entered)
     else:
-        
+        ''' USE STACK TO PLACE LATEST DELIVERED ORDER AT THE TOP '''
         final_list_to_write = WrapperStack()
         try:
             with open(write_to_file, 'r', newline='') as f:
@@ -153,6 +167,9 @@ def write_current_order(order_list_to_write, write_to_file = 'current_orders.csv
                 else:
                     break
 def assign_order_id():
+
+    ''' ASSIGNS ORDER ID TO THE GIVEN ORDER '''
+    
     today = date.today()
     date_str = make_len(str(today.day), 2)
     month_str = make_len(str(today.month), 2)
@@ -188,6 +205,9 @@ def assign_order_id():
 
 
 def add_to_orders_pqueue(order_data, price):
+
+    ''' ADDS ORDERS TO THE PRIORITY QUEUE WHICH GIVES PRIORITY BASED ON NUMBER OF ITEMS '''
+    
     payment_status = 0
     order_status = 0
     current_order_id = assign_order_id()
@@ -244,6 +264,8 @@ def add_to_orders_pqueue(order_data, price):
     return current_order_id
 
 def delivered_orders_list():
+
+    ''' RETURNS LIST OF DELIVERED ORDERS '''
     orders = []
     with open('delivered_orders.csv', 'r') as f:
         r = csv.reader(f)
@@ -258,8 +280,13 @@ def delivered_orders_list():
     else:
         return orders
     
-# '[['D001', 'Hot Lemon Tea', '1', '10', 10], ['D002', 'Hot Green Tea', '1', '10', 10]]'
+
 def view_order_by_items():
+
+    ''' GIVEN A NESTED LIST OF DATA LIKE ORDER ID, LIST OF ITEMS ORDER WITH THEIR RESPECTIVE 
+        QUANTITY AND SO ON, IT RETURNS A NESTED DICTIONARY CONTAINING ITEM NAME AND TOTAL QUANTITY OF THE ITEM
+        ACROSS ORDERS '''
+    
     items_dict = {}
     with open('current_orders.csv', 'r', newline='') as f:
         reader = csv.reader(f)
