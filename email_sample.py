@@ -10,10 +10,13 @@ def get_order_mail_id(order_id):
         with open('customer_id.csv', 'r', newline = '') as f:
             reader = csv.reader(f)
             for x in reader:
-                if x[0]==order_id:
-                    mail_id = x[1]
-                    name = x[2]
-                    return mail_id, name
+                try:
+                    if x[0]==order_id:
+                        mail_id = x[1]
+                        name = x[2]
+                        return mail_id, name
+                except:
+                    continue
     except:
         pass
     return mail_id, name
