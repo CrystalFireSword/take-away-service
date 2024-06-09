@@ -11,14 +11,10 @@ from email_sample_2 import send_mail
 app = Flask(__name__)
 app.secret_key = 'Thisisthesecretkey'
 
-'''
-# For permanent sessions
-app.permanent_session_lifetime = timedelta(days=5)
-# data can be in days or minutes or anything
-'''
 
 @app.route('/')
 def home():
+    ''' Home page '''
     content = ''
     if request.args.get('content'):
         content = request.args.get('content')
@@ -26,6 +22,9 @@ def home():
 
 @app.route('/order', methods = ['GET', 'POST'])
 def order():
+    
+    ''' order page '''
+    
     if request.method == 'POST':
         cart_items = send_to_cart(request.form)
         cart_list = temporary_cart(cart_items)
@@ -34,35 +33,34 @@ def order():
             return redirect(url_for('cart', item_list = [cart_list]))
         else:
             return redirect(url_for('cart', item_list = [[]]))
-        ### find another way to pass items)list to cart, or render template
-        '''
-        for x in request.form:
-            try:
-                if int(request.form[x]):
-                    
-                    #send_to_cart(x)
-            except:
-                return redirect(url_for('cart'))
-        '''
     return render_template('order.html', item_list = get_menu()[:])
 
 @app.route('/cart', methods = ['GET', 'POST'])
 def cart():
+    
+    ''' cart page '''
+    
     if request.method == 'POST':
         cart_items = send_to_cart(request.form)
         cart_list = temporary_cart(cart_items)
         if cart_list!=-1:
+            
+            ''' checks whether cart is not empty '''
+            
             return redirect(url_for('bill', item_list = [cart_list]))
         else:
             return redirect(url_for('cart', item_list = [[]]))
+            
     return render_template('cart.html', item_list = eval(request.args.get('item_list')))
 
 @app.route('/bill', methods = ['GET', 'POST'])
 def bill():
+
+    ''' Page to display bill '''
+    
     list_to_bill = eval(request.args.get('item_list'))
-    print(list_to_bill)
     price, list_after_bill = calculate_bill_total(list_to_bill)
-    print(list_to_bill)
+    
     if request.method == 'POST':
         if list_after_bill!=[[]]:
             print(list_to_bill)
@@ -73,8 +71,9 @@ def bill():
 
 @app.route('/login', methods = ['POST', 'GET'])
 def login():
+
+    ''' Login Page '''
     if request.method == 'POST':
-        # session.permanent = True # for permanent sessions
         user = request.form['EmailId']
         password = request.form['pwd']
         if login_check(user, password):
@@ -89,6 +88,9 @@ def login():
 
 @app.route("/user", methods = ['GET', 'POST'])
 def user():
+    
+    ''' ADMIN PAGE '''
+    
     if "user" in session:
         user = session['user']
         if request.args.get('content'):
@@ -119,10 +121,13 @@ def logout():
 
 @app.route('/track', methods = ['POST', 'GET'])
 def track():
+
+    ''' TRACK PAGE WHERE USERS ENTER THEIR ORDER IDs TO TRACK ORDER '''
+    
     if request.method == 'POST':
         items_list, price, order_status = find_order_status(request.form['order_id'])
         order_status = int(order_status)
-        status = 'STATUS:'
+        status = 'STATUS: '
         if order_status == -1:
             return render_template('track.html', content = 'Order ID not found')
         elif order_status==0:
@@ -141,6 +146,9 @@ def track():
 
 @app.route('/tracking')
 def tracking():
+
+    ''' PAGE WHERE THE USERS CAN SEE THEIR ORDER STATUS ''' 
+    
     try:
         o_id = request.args.get('order_id')
         current_status = request.args.get('current_status')
@@ -156,6 +164,8 @@ def tracking():
 
 @app.route('/payment', methods = ['GET', 'POST'])
 def payment():
+    
+    ''' PAGE FOR GETTING USER DETAILS AFTER ORDER CONFIRMATION '''
     
     list_to_bill = request.args.get('list_to_be_billed')
     price = request.args.get('price')
@@ -177,6 +187,9 @@ def payment():
 
 @app.route('/cash', methods = ['GET', 'POST'])
 def cash():
+
+    ''' MESSAGE PAGE DISPLAYED AFTER USER ENTERS DATA '''
+    
     price = request.args.get('total_price')
     unique_id = request.args.get('unique_id')
     content_to_show = request.args.get('content_to_show')
@@ -186,7 +199,11 @@ def cash():
 
 @app.route('/update_menu', methods = ['GET', 'POST'])
 def update_menu():
+
+    ''' ADMIN END PAGE FOR UPDATING MENU '''
+    
     if "user" in session:
+        # checks if user is logged in
         if request.method == 'POST':
             item_list = get_menu(1)[1:]
             menu_list_to_write = []
@@ -216,7 +233,10 @@ def update_menu():
 
 @app.route('/view_orders', methods = ['GET', 'POST'])
 def view_orders():
+
+    ''' ADMIN END PAGE TO VIEW LIVE LIST OF ORDERS BY USER ID '''
     if "user" in session:
+        # checks if user is logged in
         if request.method == 'POST':
             order_list = current_order_list()
             order_list_to_write = []
@@ -294,11 +314,14 @@ def view_orders():
 
 @app.route('/view_by_items')
 def view_by_items():
+
+    ''' ADMIN END PAGE TO VIEW ORDERS BY ITEMS '''
     if "user" in session:
         return render_template('view_order_by_items.html', item_list = view_order_by_items(), no_total = 1)
 
 @app.route('/order_status/<o_id>')
 def order_status(o_id):
+    ''' ADMIN END PAGE TO VIEW ORDER DETAILS WHEN ORDER ID IS CLICKED '''
     if "user" in session:
         items_list, price, order_status = find_order_status(o_id)
         return render_template('bill.html', item_list = eval(items_list), total_amount = price, no_button = 1, order_id = 'ORDER ID:'+o_id)
@@ -307,6 +330,7 @@ def order_status(o_id):
         
 @app.route('/delivered_orders')
 def delivered_orders():
+    ''' PAGE TO DISPLAY LIST OF ORDERS THAT HAVE BEEN DELIVERED '''
     if "user" in session:
         order_list = delivered_orders_list()
         return render_template('delivered_orders.html', order_list = order_list)
