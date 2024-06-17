@@ -139,6 +139,9 @@ def write_current_order(order_list_to_write, write_to_file = 'current_orders.csv
             writer.writerows(rows_to_be_entered)
     else:
         ''' USE STACK TO PLACE LATEST DELIVERED ORDER AT THE TOP '''
+        ''' NOTE: ALTERNATE APPROACH IS TO USE QUEUES BY FIRST ENQUEUEING THE NEW DELIVERIES, THEN ENQUEUEING
+        ORDERS FROM THE ORIGINAL FILE, AND FINALLY DEQUEUEING THE ENTIRE QUEUE AND WRITING EACH ORDER TO THE 
+        DELIVERED ORDERS FILE. STACKS HAVE BEEN USED HERE TO SHOW HOW LIFO CAN BE USED TO SHOW LATEST DELIVERED ORDERS FIRST.'''
         final_list_to_write = WrapperStack()
 
         lis_temp = WrapperStack()    # stack that contains already delivered orders from source file
