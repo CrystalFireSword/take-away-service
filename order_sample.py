@@ -140,20 +140,25 @@ def write_current_order(order_list_to_write, write_to_file = 'current_orders.csv
     else:
         ''' USE STACK TO PLACE LATEST DELIVERED ORDER AT THE TOP '''
         final_list_to_write = WrapperStack()
+
+        lis_temp = WrapperStack()    # stack that contains already delivered orders from source file
         try:
             with open(write_to_file, 'r', newline='') as f:
                 reader = csv.reader(f)
                 for x in reader:
                     try:
-                        if x[0]!='':
-                            final_list_to_write.push(x)
+                        if x[0]!='' and x[0][0]=='D':
+                            lis_temp.push(x)
                     except:
                         continue
         except:
             pass
-        
+
+        while not lis_temp.isEmpty():
+            final_list_to_write.push(lis_temp.pop())    # adds existing delivered orders to final stack
         for x in order_list_to_write:
-            final_list_to_write.push(x)
+            final_list_to_write.push(x)        # adds freshly delivered orders to the final stack
+
         with open(write_to_file, 'w', newline='') as f:
             writer = csv.writer(f)
             row_to_be_entered = ['orderid','order_items','total_items','total_price','payment_status','order_status', 'order_time', 'delivery_time']
